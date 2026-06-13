@@ -1,0 +1,22 @@
+@startuml
+
+package "Mobile Application" {
+  [UI Layer]
+}
+
+package "Backend Server" {
+  [API]
+  [Business Logic]
+}
+
+database "Database"
+
+[UI Layer] --> [API]
+[API] --> [Business Logic]
+[Business Logic] --> Database
+
+[API] --> "Payment Gateway"
+[API] --> "Google Auth"
+[API] --> "AI Assistant"
+
+@enduml

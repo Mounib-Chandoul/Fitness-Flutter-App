@@ -1,0 +1,27 @@
+@startuml
+
+node "User Smartphone" {
+  component "Mobile App"
+}
+
+node "Cloud Server" {
+  component "Backend API"
+}
+
+node "Database Server" {
+  database "DB"
+}
+
+node "External Services" {
+  component "Payment Gateway"
+  component "Google Auth"
+  component "AI Assistant"
+}
+
+"Mobile App" --> "Backend API"
+"Backend API" --> "DB"
+"Backend API" --> "Payment Gateway"
+"Backend API" --> "Google Auth"
+"Backend API" --> "AI Assistant"
+
+@enduml

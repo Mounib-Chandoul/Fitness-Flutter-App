@@ -1,0 +1,14 @@
+@startuml
+
+start
+:Login;
+:View client requests;
+:Create or customize plan;
+if (Paid plan?) then (Yes)
+  :Set price;
+endif
+:Send plan to client;
+:Chat with client;
+stop
+
+@enduml

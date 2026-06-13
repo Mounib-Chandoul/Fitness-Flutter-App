@@ -1,0 +1,21 @@
+@startuml
+actor Client
+
+participant "Mobile Application" as App
+participant "Backend API" as API
+participant "Payment Gateway" as Payment
+participant "Coach" as Coach
+
+Client -> App : Select paid plan
+App -> API : Request plan purchase (planId)
+API -> API : Validate user & plan availability
+API -> Payment : Initiate payment
+Payment -> Client : Payment confirmation UI
+Client -> Payment : Confirm payment
+Payment --> API : Payment success notification
+API -> API : Register payment & activate plan
+API -> Coach : Notify new client subscription
+API --> App : Purchase success
+App --> Client : Access to paid plan granted
+
+@enduml

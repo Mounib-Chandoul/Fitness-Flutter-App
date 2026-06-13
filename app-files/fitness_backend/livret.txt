@@ -1,0 +1,162 @@
+# Livret de Stage - 30 jours (Fitness Tracker)
+
+## Contexte général
+Projet : application mobile de suivi fitness (Flutter frontend + FastAPI backend). 
+Objectifs : auth, gestion profils, catalogue plans, achat virtuel, administration SQLAdmin, chat/suivi.
+
+---
+
+## Synthèse de l'analyse projet
+- Backend : `fitness_backed/app` (routes, models, schemas, dependencies, main)
+- Frontend : `fitness/lib` (pages, service, main architecte, HTTP API, user flows)
+- Structure : Flutter mobile app + API FastAPI + base SQLite/PostgreSQL
+- Outils : `requirements.txt`, `pubspec.yaml`
+- Ce que j’ai vérifié : endpoints auth/users/plans + sécurité JWT + hashing passlib + SQLAdmin + app Flutter UI
+
+---
+
+## Livret 30 jours du projet
+### Jour 1
+- Démarrage du repo, lecture du cahier des charges, définition des livrables.
+- Installations : Flutter SDK, Python 3.11, virtualenv, dépendances FastAPI.
+- J'ai commencé l'apprentissage FastAPI (documentation officielle, routing, Pydantic).
+
+### Jour 2
+- Création du backend : structure `fitness_backed/app` et initialisation SQLAlchemy.
+- architecturation `main.py`, `models.py`, `schemas.py`, `dependencies.py`.
+- premières notes d'apprentissage : ORM, sessions, migrations potentielles. 
+
+### Jour 3
+- Modèles de données : `User`, `Plan`, table `purchases` many-to-many.
+- Tests DB avec gestion `sqlite:///:memory:` pour protos.
+- apprentissage : relations SQLAlchemy, cascade, back_populates.
+
+### Jour 4
+- Auth backend : `/auth/register`, `/auth/login`.
+- intégration `passlib.CryptContext` + `bcrypt` (gestion mot de passe sécurisée).
+- test manuel via HTTPie / curl (post JSON, lecture réponses). 
+
+### Jour 5
+- JWT setup (`create_access_token`, `verify_token`, expiration 30mn).
+- implémentation dépendances : `get_current_user`, `get_current_admin`.
+- apprentissage : OAuth2PasswordBearer, sécurité FastAPI.
+
+### Jour 6
+- Users CRUD : routes `/users/all`, `/users/{email}`, `/users/me`, update profile.
+- DTOs : `UserResponse`, `UserUpdate`, `RoleUpdate`.
+- contrôle access / tests unitaires avec `TestClient`.
+
+### Jour 7
+- besoin coach : `/coach-profile`, `/followed-coaches/{user_email}`.
+- ajout logique achats : relation `purchased_plans` et génération de listes de coachs.
+- apprentissage : sérialisation Pydantic, jointure lazy.
+
+### Jour 8
+- routes Admin (admin only) : `/admin/users`, `/admin/users/{id}` + role update.
+- SQLAdmin integration dans `main.py` (auth personnalisée via sessions). 
+
+### Jour 9
+- plans API : `POST /plans`, `GET /plans`, `GET /plans/my`, `DELETE /plans/{id}`.
+- `POST /plans/{plan_id}/purchase` : logiques achat/utilisateur.
+- apprentissage : route prefix + tags + validation Flux.
+
+### Jour 10
+- tests API : pytest endpoints, cas d’erreur, droits non autorisé.
+- fixes 401/403, text response standard.
+
+### Jour 11
+- frontend initial : setup Flutter, structure pages, paquets `http`, `shared_preferences`.
+- apprentissage Flutter : widgets, hot reload, gestion d’état.
+
+### Jour 12
+- pages `LoginPage`, `RegisterPage` connectées à API backend.
+- validation formulaires, gestion erreurs côté UI.
+
+### Jour 13
+- stockage secure JWT avec `SharedPreferences`.
+- route guarding : `MainShell` interdit accès sans token.
+
+### Jour 14
+- `DiscoverPage` : liste plans via GET `/plans`.
+- filtres catégories; layout cartes Material.
+
+### Jour 15
+- `ProfilePage` utilisateur/coach.
+- PATCH `/update-profile`, `/update-avatar` et rafraîchissement UI.
+
+### Jour 16
+- coach solo: page `CreatePlanPage` form JSON complexe.
+- POST `/plans` + feedback : success/erreur.
+
+### Jour 17
+- coach management: `MyPlansPage`, édition et suppression de plans.
+- DELETE backend/UI et refresh list.
+
+### Jour 18
+- achats client : bouton `Acheter` + POST `/plans/{id}/purchase`.
+- messages de succès/erreur et protection contre double achat.
+- apprentissage : transactions DB, idempotence côté API.
+
+### Jour 19
+- page suivi coach : `/followed-coaches/{email}` + affichage coaches + plans.
+- apprentissage : structuration de données imbriquées pour UI.
+
+### Jour 20
+- intégration SQLAdmin requérable via `/admin` backend.
+- test de la liaison admin+role + sécurité.
+- apprentissage : utilisation de session cookie sur FastAPI.
+
+### Jour 21
+- tests Widget Flutter (login, register, catalogue, profile).
+- mise en place `flutter_test` et `integration_test`.
+- apprentissage : stratégie de tests UI, fiabilité e2e.
+
+### Jour 22
+- travail sur la rédaction du rapport (chapitres 1 à 3, notes d’architecture).
+- diagrammes use case/class/sequence préparés pour le livrable.
+- apprentissage : communication technique et synthèse de projet.
+
+### Jour 23
+- renforcement backend : validation sécurisée et hachage (révision) ; correction bug.
+- test charge simple : simulation 50 requêtes /s à Bestand.
+- apprentissage : robustesse et logging pour production.
+
+### Jour 24
+- ergonomie UI : responsive, mode sombre, animations transitions.
+- fonctionnalité recherche par texte sur catalogue (filtre par nom).
+- apprentissage : principes de design mobile et UX.
+
+### Jour 25
+- finalisation rapport Sprints 2 et 3 ; intégration captures écrans.
+- mise à jour sommaire, annexes, remerciements.
+- apprentissage : rédaction professionnelle et normes académiques.
+
+### Jour 26
+- packaging, verrouillage dépendances : `pip freeze > requirements.txt`, `pubspec.lock`.
+- rédaction README `setup + run` pour backend + frontend.
+- apprentissage : préparation de livraison clean repository.
+
+### Jour 27
+- tests end-to-end complets via `flutter drive` ou `integration_test`.
+- correction blocages et axis de performances.
+- apprentissage : approche QA systématique.
+
+### Jour 28
+- audit qualité : `flutter analyze`, `pylint`/`ruff`, correction warnings.
+- revue code final : suppression code mort, mise en forme.
+- apprentissage : qualité de code & contrôle statique.
+
+### Jour 29
+- release finale : génération Flutter APK (et/ou bundle), compilation FastAPI.
+- tests scripts démarrage (`uvicorn`, `flutter run`).
+- apprentissage : pipeline release et CI manuelle.
+
+### Jour 30
+- livraison du livret, rapport final, backup code.
+- revue finale avec check-list, proposition future échelle.
+- apprentissage : bilan personnel, points forts et axes d’amélioration.
+
+---
+
+## Fichier créé
+- `livret_stage_30jours.md` (contenant le point ci-dessus).

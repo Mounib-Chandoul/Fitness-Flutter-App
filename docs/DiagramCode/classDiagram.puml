@@ -1,0 +1,57 @@
+@startuml
+
+class User {
+  id
+  name
+  email
+  password
+  role
+}
+
+class Client {
+  fitnessGoal
+}
+
+class Coach {
+  certification
+  verified
+}
+
+class Admin
+
+class Plan {
+  id
+  type
+  price
+}
+
+class Payment {
+  id
+  amount
+  status
+}
+
+class Message {
+  id
+  content
+  timestamp
+}
+
+class Report {
+  id
+  progressData
+}
+
+User <|-- Client
+User <|-- Coach
+User <|-- Admin
+
+Coach "1" -- "*" Plan
+Client "1" -- "*" Plan
+Client "1" -- "*" Message
+Coach "1" -- "*" Message
+Client "1" -- "*" Payment
+Plan "1" -- "0..1" Payment
+Client "1" -- "*" Report
+
+@enduml

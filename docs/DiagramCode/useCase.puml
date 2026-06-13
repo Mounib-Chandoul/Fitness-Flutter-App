@@ -1,0 +1,59 @@
+@startuml
+left to right direction
+
+actor Client
+actor Coach
+actor Administrator
+actor "Google Auth" as Google
+actor "Payment Gateway" as Payment
+actor "AI Assistant" as AI
+
+rectangle "Fitness Coaching Mobile Application" {
+
+    (Register Account) as UC1
+    (Login) as UC2
+    (Manage Profile) as UC3
+
+    (View Free Plans) as UC4
+    (Purchase Paid Plans) as UC5
+    (Request Custom Plan) as UC6
+    (Chat with Coach) as UC7
+    (View Progress Reports) as UC8
+    (Ask AI Questions) as UC9
+
+    (Create Training/Nutrition Plans) as UC10
+    (Customize Client Plans) as UC11
+    (Manage Client Requests) as UC12
+
+    (Verify Coach Accounts) as UC13
+    (Manage Users) as UC14
+    (Monitor Platform Activity) as UC15
+}
+
+Client --> UC1
+Client --> UC2
+Client --> UC3
+Client --> UC4
+Client --> UC5
+Client --> UC6
+Client --> UC7
+Client --> UC8
+Client --> UC9
+
+Coach --> UC1
+Coach --> UC2
+Coach --> UC3
+Coach --> UC7
+Coach --> UC10
+Coach --> UC11
+Coach --> UC12
+
+Administrator --> UC13
+Administrator --> UC14
+Administrator --> UC15
+
+UC2 --> Google : <<include>>
+UC5 --> Payment : <<include>>
+UC9 --> AI : <<include>>
+
+@enduml

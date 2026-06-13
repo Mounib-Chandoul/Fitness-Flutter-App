@@ -1,0 +1,16 @@
+@startuml
+
+start
+:Login;
+:Search coach or plan;
+if (Free plan?) then (Yes)
+  :Access plan;
+else (No)
+  :Pay for plan;
+endif
+:Chat with coach;
+:Follow training plan;
+:View progress reports;
+stop
+
+@enduml

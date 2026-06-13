@@ -1,0 +1,14 @@
+@startuml
+actor Client
+participant "Mobile App" as App
+participant "Backend API" as API
+participant "Google Auth" as Google
+
+Client -> App : Enter credentials
+App -> API : Login request
+API -> Google : Validate token
+Google --> API : Auth success
+API --> App : Login success
+App --> Client : Dashboard displayed
+
+@enduml
