@@ -1,4 +1,4 @@
-readme_content = """# Fitness Tracker - PFE Project
+
 
 This project is a full-stack mobile application designed to bridge the gap between fitness coaches and athletes. Developed during a professional internship at **IT HOUSE**, the application aims to centralize training programs, facilitate performance tracking, and foster a community environment.
 
